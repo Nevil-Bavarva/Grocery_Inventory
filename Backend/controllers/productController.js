@@ -67,9 +67,24 @@ const updateProduct = asyncHandler (async (req, res)=> {
 
 });
 
+
+// get all product 
+
+const getAllProduct = asyncHandler (async (req, res)=> {
+    const products = await Product.find().sort("-createdAt");
+    if(products) {
+        res.status(200).json(products);
+    } else {
+        res.status(400);
+        throw new Error("No product found");
+    } 
+    
+});
+
 module.exports = {
     createProduct,
     getProduct,
     deleteProduct,
     updateProduct,
+    getAllProduct,
 };
